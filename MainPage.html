@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SacredFlame Studio - Tus Juegos Favoritos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b69 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(138, 43, 226, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/api/placeholder/1400/600');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: #cccccc;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Games Section */
+        .games-section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(138, 43, 226, 0.5);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .game-card:hover .game-image {
+            transform: scale(1.05);
+        }
+
+        .game-info {
+            padding: 30px;
+        }
+
+        .game-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .game-description {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: linear-gradient(45deg, #8a2be2, #4169e1);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .game-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rating-score {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        .rating-text {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .game-price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        .price-original {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        .discount-badge {
+            background: #ff6b6b;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .game-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-small {
+            padding: 10px 15px;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        /* Featured Game */
+        .featured-game {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .featured-content h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .featured-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #cccccc;
+            margin-bottom: 30px;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 80px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #cccccc;
+            font-size: 1.1rem;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .newsletter p {
+            color: #cccccc;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .newsletter-input::placeholder {
+            color: #999;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .social-links a {
+            color: #cccccc;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #4ecdc4;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .featured-game {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+        <nav class="nav">
+            <div class="logo" onclick="goToHome()">SacredFlame Studio</div>
+            <ul class="nav-links">
+                <li><a href="MainPage.html">Inicio</a></li>
+                <li><a href="MainPage.html#juegos">Juegos</a></li>
+                <li><a href="MainPage.html#sobre-nosotros">Sobre Nosotros</a></li>
+                <li><a href="MainPage.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="floating">SacredFlame Studio</h1>
+            <p>Creando experiencias de juego únicas e innovadoras que desafían los límites de la imaginación</p>
+            <div class="hero-buttons">
+                <a href="#juegos" class="btn btn-primary">🎮 Explorar Juegos</a>
+                <a href="#sobre-nosotros" class="btn btn-secondary">📖 Conoce Más</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Featured Game -->
+        <section class="featured-game fade-in">
+            <div class="featured-content">
+                <h2>🔥 Juego Destacado</h2>
+                <p>Descubre Alchemy VR: una experiencia de realidad virtual única que te sumerge en el mundo de la alquimia medieval, donde podrás crear pociones mágicas y explorar laboratorios misteriosos.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="openGamePage('alchemy-vr')">Ver Detalles</button>
+                    <button class="btn btn-secondary">Descargar Demo</button>
+                </div>
+            </div>
+            <img src="/api/placeholder/400/250" alt="Alchemy VR" class="featured-image">
+        </section>
+
+        <!-- Games Section -->
+        <section class="games-section fade-in" id="juegos">
+            <h2 class="section-title">🎮 Nuestros Juegos</h2>
+            <div class="games-grid">
+                <!-- Game Card 1 - Alchemy VR -->
+                <div class="game-card" onclick="openGamePage('alchemy-vr')">
+                    <img src="/api/placeholder/400/250" alt="Alchemy VR" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">ALCHEMY VR</h3>
+                        <p class="game-description">
+                            Sumérgete en el fascinante mundo de la alquimia medieval con tecnología VR de vanguardia. 
+                            Crea pociones mágicas, explora laboratorios misteriosos y descubre secretos ancestrales.
+                        </p>
+                        <div class="game-tags">
+                            <span class="tag">VR</span>
+                            <span class="tag">Simulación</span>
+                            <span class="tag">Aventura</span>
+                        </div>
+                        <div class="game-stats">
+                            <div class="game-rating">
+                                <span class="rating-score">9.1</span>
+                                <span class="rating-text">Muy Positivo</span>
+                            </div>
+                            <div class="game-price">
+                                <span class="price-original">$29.99</span>
+                                $24.99
+                                <span class="discount-badge">-17%</span>
+                            </div>
+                        </div>
+                        <div class="game-actions">
+                            <button class="btn btn-primary btn-small">Jugar Ahora</button>
+                            <button class="btn btn-secondary btn-small">Demo VR</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 2 - Redemption -->
+                <div class="game-card" onclick="openGamePage('redemption')">
+                    <img src="/api/placeholder/400/250" alt="Redemption" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">REDEMPTION</h3>
+                        <p class="game-description">
+                            Una emotiva historia de redención en un mundo post-apocalíptico. Toma decisiones difíciles que 
+                            afectarán el destino de los supervivientes y lucha por encontrar esperanza en la oscuridad.
+                        </p>
+                        <div class="game-tags">
+                            <span class="tag">RPG</span>
+                            <span class="tag">Historia</span>
+                            <span class="tag">Supervivencia</span>
+                        </div>
+                        <div class="game-stats">
+                            <div class="game-rating">
+                                <span class="rating-score">9.5</span>
+                                <span class="rating-text">Excelente</span>
+                            </div>
+                            <div class="game-price">
+                                <span class="price-original">$39.99</span>
+                                $29.99
+                                <span class="discount-badge">-25%</span>
+                            </div>
+                        </div>
+                        <div class="game-actions">
+                            <button class="btn btn-primary btn-small">Jugar Ahora</button>
+                            <button class="btn btn-secondary btn-small">Demo</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 3 - Dead Man's Hand -->
+                <div class="game-card" onclick="openGamePage('deadmanshand')">
+                    <img src="/api/placeholder/400/250" alt="Dead Mans Hand" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">DEAD MAN'S HAND</h3>
+                        <p class="game-description">
+                            Un thriller de poker del salvaje oeste donde cada mano podría ser la última. Combina estrategia, 
+                            bluff y tiroteos en una experiencia única que mezcla cartas con acción.
+                        </p>
+                        <div class="game-tags">
+                            <span class="tag">Western</span>
+                            <span class="tag">Poker</span>
+                            <span class="tag">Acción</span>
+                        </div>
+                        <div class="game-stats">
+                            <div class="game-rating">
+                                <span class="rating-score">8.8</span>
+                                <span class="rating-text">Muy Positivo</span>
+                            </div>
+                            <div class="game-price">
+                                <span class="price-original">$19.99</span>
+                                $14.99
+                                <span class="discount-badge">-25%</span>
+                            </div>
+                        </div>
+                        <div class="game-actions">
+                            <button class="btn btn-primary btn-small">Jugar Ahora</button>
+                            <button class="btn btn-secondary btn-small">Demo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section fade-in">
+            <h2 class="section-title">🏆 Nuestros Logros</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Juegos Lanzados</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50K</div>
+                    <div class="stat-label">Jugadores Activos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.8</div>
+                    <div class="stat-label">Calificación Promedio</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Premios Ganados</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter fade-in">
+            <h2>📧 Mantente Actualizado</h2>
+            <p>Suscríbete a nuestro newsletter para recibir noticias sobre nuevos lanzamientos, actualizaciones y ofertas especiales</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Tu email" class="newsletter-input">
+                <button type="submit" class="btn btn-primary">Suscribirse</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 GameDev Studio. Todos los derechos reservados.</p>
+            <ul class="social-links">
+                <li><a href="#" title="Discord">🎮</a></li>
+                <li><a href="#" title="Twitter">🐦</a></li>
+                <li><a href="#" title="YouTube">📺</a></li>
+                <li><a href="#" title="Steam">🎯</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+         // Función actualizada para navegación
+        function openGamePage(gameId) {
+            if (gameId === 'alchemy-vr') {
+                window.location.href = 'alchemy-vr.html';
+            } else if (gameId === 'redemption') {
+                window.location.href = 'redemption.html';
+            }
+        }
+
+        function goToHome() {
+            window.location.href = 'homepage_updated.html';
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.2s';
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in class
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
