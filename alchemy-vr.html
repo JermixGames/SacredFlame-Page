@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameDev Showcase - Haste</title>
+    <title>GameDev Showcase - Alchemy-vr</title>
     <style>
         * {
             margin: 0;
@@ -87,7 +87,7 @@
 
         .main-image {
             width: 100%;
-            height: 400px;
+            height: 600px;
             border-radius: 15px;
             object-fit: cover;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
@@ -465,7 +465,7 @@
     <!-- Header -->
      <header class="header"> 
         <nav class="nav">
-            <div class="logo">GameDev Studio</div>
+            <div class="logo">SacredFlame Studio</div>
             <ul class="nav-links">
                 <li><a href="MainPage.html">Inicio</a></li>
                 <li><a href="MainPage.html#juegos">Juegos</a></li>
@@ -479,9 +479,9 @@
         <!-- Game Hero Section -->
         <section class="game-hero fade-in">
             <div class="game-media">
-                <img src="/api/placeholder/800/400" alt="Haste - Captura principal" class="main-image" id="mainImage">
+                <img src="Images/BannerPro.png" alt="Alchemy-vr - Captura principal" class="main-image" id="mainImage">
                 <div class="thumbnail-gallery">
-                    <img src="/api/placeholder/120/80" alt="Screenshot 1" class="thumbnail active" onclick="changeImage(this, '/api/placeholder/800/400')">
+                    <img src="Images/IconoVR.png" alt="Screenshot 1" class="thumbnail active" onclick="changeImage(this, 'Images/IconoVR.png')">
                     <img src="/api/placeholder/120/80" alt="Screenshot 2" class="thumbnail" onclick="changeImage(this, '/api/placeholder/800/400')">
                     <img src="/api/placeholder/120/80" alt="Screenshot 3" class="thumbnail" onclick="changeImage(this, '/api/placeholder/800/400')">
                     <img src="/api/placeholder/120/80" alt="Screenshot 4" class="thumbnail" onclick="changeImage(this, '/api/placeholder/800/400')">
@@ -491,14 +491,27 @@
             <div class="game-info floating">
                 <h1 class="game-title">Alchemy VR</h1>
                 <p class="game-description">
-                    Un juego de carreras en tercera persona de alta velocidad, ambientado en un universo que colapsa. 
-                    Corre a través de varios mundos, domina tu movimiento y usa objetos y habilidades para superar el apocalipsis.
+                    En AlchemyVR, encarnas a Zephyr Oscuro, un alquimista que deberá defender su torre de hordas enfurecidas usando:
+                    <ul style="margin-top: 15px; padding-left: 25px;">
+                        <li>🔮 Sistema de alquimia VR con física realista</li>
+                        <li>⚗️ 10 elementos secretos por descubrir</li>
+                        <li>🏰 Mecánicas híbridas: Tower Defense + acción directa</li>
+                        <li>🧪 Más de 15 combinaciones de pociones</li>
+                    </ul>
                 </p>
+                <!-- Icono del Juego -->
+                <div class="game-icon-section" style="text-align: center; margin: 25px 0;">
+                    <img src="Images/IconoVR.png" alt="Icono de Alchemy VR" 
+                        style="width: 150px; height: 150px; border-radius: 25px; 
+                                box-shadow: 0 0 35px rgba(78, 205, 196, 0.4);
+                                animation: floating 3s ease-in-out infinite;">
+                    <p style="margin-top: 15px; color: #4ecdc4; font-weight: bold;">El símbolo de la alquimia moderna</p>
+                </div>
 
                 <div class="game-tags">
                     <span class="tag">Acción</span>
                     <span class="tag">Aventura</span>
-                    <span class="tag">Carreras</span>
+                    <span class="tag">Tower Defense</span>
                     <span class="tag">Un jugador</span>
                 </div>
 
@@ -544,36 +557,40 @@
                 </div>
 
                 <!-- Game Description -->
-                <div class="game-description-detailed">
-                    <p style="margin-bottom: 25px; line-height: 1.7; font-size: 1.1rem;">
-                        Haste es una experiencia de juego única que combina velocidad extrema con mecánicas de movimiento fluidas. 
-                        El universo está colapsando y tú eres la única esperanza para escapar de la destrucción inminente.
-                    </p>
-                    
-                    <p style="margin-bottom: 30px; line-height: 1.7; font-size: 1.1rem;">
-                        Sumérgete en un mundo donde cada segundo cuenta. Con gráficos impresionantes y una banda sonora épica, 
-                        Haste te desafía a dominar el arte del movimiento mientras navegas por paisajes que se desmoronan a tu alrededor.
-                    </p>
-                </div>
+                <p class="game-description">
+                    En <strong>AlchemyVR</strong>, encarnas a <em>Zephyr Oscuro</em>, un alquimista renegado que deberá defender su torre de una multitud enfurecida usando ingenio, elementos mágicos y estrategia. Combina la alquimia en realidad virtual con la defensa táctica de torres en un mundo donde cada decisión determina tu supervivencia.
 
+                    <br><br>
+                    🔥 <strong>Características Clave:</strong>
+                    <ul style="margin-top: 15px; padding-left: 25px;">
+                        <li>🧪 <strong>Sistema de Alquimia Inmersivo:</strong> Mezcla <em>Pyro, Ventus, Hydros y Geos</em> con gestos realistas en VR. ¡La física de los ingredientes y el caldero te sorprenderá!</li>
+                        
+                        <li>📜 <strong>Recetas Ocultas en la Torre:</strong> Explora rincones secretos de tu fortaleza para encontrar <em>páginas perdidas</em> con recetas legendarias. ¡Cada descubrimiento desbloquea poderes catastróficos!</li>
+                        
+                        <li>🏰 <strong>Defensa Estratégica:</strong> Coloca frascos redondos en <em>3 torres alquímicas</em> para efectos prolongados (escudos de tierra, tormentas de fuego) o lanza frascos cuadrados con explosiones elementales en área.</li>
+                        
+                        <li>👹 <strong>Enemigos Adaptativos:</strong> Los aldeanos y criaturas desarrollan <em>resistencias</em>. ¡Analiza sus debilidades y ajusta tus pociones en tiempo real!</li>
+                        
+                        <li>🔮 <strong>Progresión No Lineal:</strong> Mejora tu caldero, desbloquea ingredientes raros y domina <em>10 elementos secretos</em> para convertirte en el alquimista definitivo.</li>
+                    </ul>
+
+                    <br>
+                    <em>¿Podrás dominar los elementos, proteger tus secretos oscuros y sobrevivir a la ira de Eldoria?</em>
+                </p>
                 <!-- Gameplay Section -->
                 <div class="gameplay-section" style="margin-bottom: 40px;">
-                    <h3 style="color: #ff6b6b; margin-bottom: 20px; font-size: 1.4rem;">⚡ Jugabilidad</h3>
+                    <h3 style="color: #ff6b6b; margin-bottom: 20px; font-size: 1.4rem;">⚗️ Mecánicas de Alquimia</h3>
                     <div class="content-with-image">
                         <div class="content-text">
-                            <p style="line-height: 1.6; margin-bottom: 15px;">
-                                El sistema de movimiento de Haste está diseñado para ofrecer una experiencia fluida y responsiva. 
-                                Combina saltos, deslizamientos y habilidades especiales para crear secuencias de movimiento espectaculares.
-                            </p>
                             <ul style="list-style: none; margin-left: 0;">
-                                <li style="padding: 8px 0; color: #cccccc;">🏃‍♂️ Movimiento fluido y responsivo</li>
-                                <li style="padding: 8px 0; color: #cccccc;">🎯 Sistema de habilidades dinámico</li>
-                                <li style="padding: 8px 0; color: #cccccc;">⚡ Mecánicas de velocidad extrema</li>
-                                <li style="padding: 8px 0; color: #cccccc;">🎮 Controles intuitivos</li>
+                                <li style="padding: 8px 0; color: #cccccc;">🖐️ Interacción física con ingredientes (mezclar, agitar)</li>
+                                <li style="padding: 8px 0; color: #cccccc;">🔥 Sistema de destilación con control gestual</li>
+                                <li style="padding: 8px 0; color: #cccccc;">🧙 Paginas de recetas escondida en la torre</li>
+                                <li style="padding: 8px 0; color: #cccccc;">💥 Frasco cuadrado para explosiones elementales en área</li>
                             </ul>
                         </div>
                         <div class="content-image">
-                            <img src="/api/placeholder/400/250" alt="Gameplay de Haste" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                            <img src="Images/AlchemyProcess.png" alt="Proceso alquímico" style="width: 100%; border-radius: 12px;">
                         </div>
                     </div>
                 </div>
@@ -796,7 +813,9 @@
                 }
             });
         });
-
+        function goToHome() {
+            window.location.href = 'MainPage.html';
+        }
         // Add parallax effect
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
