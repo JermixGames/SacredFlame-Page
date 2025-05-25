@@ -641,14 +641,14 @@
 
                 <h3 style="color: #ff6b6b; margin-bottom: 15px; font-size: 1.4rem;">Características Principales</h3>
                 <ul class="feature-list">
-                    <li>Sistema de movimiento fluido y responsivo</li>
-                    <li>Múltiples mundos únicos para explorar</li>
-                    <li>Mecánicas de habilidades y objetos</li>
-                    <li>Gráficos impresionantes con efectos visuales</li>
-                    <li>Banda sonora épica y envolvente</li>
-                    <li>Logros de Steam integrados</li>
-                    <li>Controles personalizables</li>
-                    <li>Modo historia y desafíos extras</li>
+                    <li>Sistema de alquimia inmersivo en realidad virtual</li>
+                    <li>Múltiples elementos y recetas por descubrir</li>
+                    <li>Mecánicas híbridas de tower defense y acción</li>
+                    <li>Gráficos optimizados para VR con efectos visuales impresionantes</li>
+                    <li>Banda sonora épica y envolvente en 3D</li>
+                    <li>Sistema de progresión no lineal</li>
+                    <li>Controles gestuales intuitivos</li>
+                    <li>Campaña principal y desafíos extras</li>
                 </ul>
 
                 <h3 style="color: #ff6b6b; margin-bottom: 15px; font-size: 1.4rem;">Requisitos del Sistema</h3>
@@ -709,7 +709,16 @@
     </div>
 
     <script>
-                // Script específico para comentarios
+                // 💡 Esta función debe estar definida globalmente para que los onclick funcionen
+        function changeImage(thumbnail, newSrc) {
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            thumbnail.classList.add('active');
+            document.getElementById('mainImage').src = newSrc;
+        }
+        
+        // Script específico para comentarios
         let currentRating = 0;
         const gameId = 'alchemy-vr';
 
@@ -763,22 +772,39 @@
 
         // Cargar comentarios al iniciar
         window.addEventListener('DOMContentLoaded', () => {
-            const comments = JSON.parse(localStorage.getItem(`comments-${gameId}`) || []);
+            const comments = JSON.parse(localStorage.getItem(`comments-${gameId}`) || "[]");
             comments.forEach(comment => addCommentToDOM(comment));
-        });
 
-        function changeImage(thumbnail, newSrc) {
-            // Remove active class from all thumbnails
-            document.querySelectorAll('.thumbnail').forEach(thumb => {
-                thumb.classList.remove('active');
-            });
-            
-            // Add active class to clicked thumbnail
-            thumbnail.classList.add('active');
-            
-            // Change main image
-            document.getElementById('mainImage').src = newSrc;
-        }
+            const form = document.getElementById('commentForm');
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const author = document.getElementById('commentAuthor').value;
+                    const content = document.getElementById('commentContent').value;
+
+                    if (author && content && currentRating > 0) {
+                        const comment = {
+                            author,
+                            content,
+                            rating: currentRating,
+                            date: new Date().toLocaleDateString()
+                        };
+
+                        const comments = JSON.parse(localStorage.getItem(`comments-${gameId}`) || "[]");
+                        comments.push(comment);
+                        localStorage.setItem(`comments-${gameId}`, JSON.stringify(comments));
+
+                        this.reset();
+                        currentRating = 0;
+                        document.querySelectorAll('.rating-stars span').forEach(star => {
+                            star.classList.remove('active');
+                        });
+
+                        addCommentToDOM(comment);
+                    }
+                });
+            }
+
 
         // Intersection Observer for animations
         const observerOptions = {
